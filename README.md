@@ -26,7 +26,7 @@ micro-app-adapter/
 
 | 适配器包 | 框架 | 构建工具 | React版本要求 | Vue版本要求 | 特殊功能 |
 |---------|------|---------|--------------|------------|---------|
-| @micro-app-adapter/react-vite | React | Vite | >=17.0.0 | - | ESM输出 |
+| @micro-app-adapter/react-vite | React | Vite | >=16.8.0 | - | ESM输出 |
 | @micro-app-adapter/react-webpack | React | Webpack | >=16.8.0 | - | public-path、CJS+ESM输出 |
 | @micro-app-adapter/vue3-vite | Vue | Vite | - | >=3.0.0 | ESM输出 |
 | @micro-app-adapter/vue3-webpack | Vue | Webpack | - | >=3.0.0 | public-path、CJS+ESM输出、route-sync独立入口 |
@@ -228,7 +228,7 @@ npm publish
 
 | 特性 | react-vite | react-webpack |
 |-----|-----------|---------------|
-| React 最低版本 | 17.0.0 | 16.8.0 |
+| React 最低版本 | 16.8.0 | 16.8.0 |
 | React 18 支持 | 完整支持 | 完整支持 + 兼容模式 |
 | useSyncExternalStore | 原生使用 | 提供兼容 shim |
 

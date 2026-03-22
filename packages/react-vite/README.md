@@ -17,7 +17,7 @@ React + Vite 项目的微前端生命周期适配器，帮助 React 子应用快
 
 - 🚀 **ESM 输出** - 原生 ES Module，符合 Vite 生态
 - 📦 **零配置** - 开箱即用，无需复杂配置
-- 🎯 **React 17+** - 支持 React 17 和 React 18
+- 🎯 **React 16.8+** - 支持 React 16.8+ 和 React 17/18
 - 💪 **TypeScript** - 完整类型支持
 
 ## 安装
@@ -34,8 +34,8 @@ yarn add @micro-app-adapter/react-vite
 
 ## 版本要求
 
-- React >= 17.0.0
-- React-DOM >= 17.0.0
+- React >= 16.8.0
+- React-DOM >= 16.8.0
 - React-Router-DOM >= 6.0.0 (可选)
 
 ## 快速开始
@@ -470,7 +470,7 @@ pnpm build
 ## 注意事项
 
 1. **不需要 public-path**: Vite 项目无需配置 public-path
-2. **React 版本**: 要求 React 17+，推荐使用 React 18
+2. **React 版本**: 要求 React 16.8+，推荐使用 React 18
 3. **路由库**: 使用 react-router-dom v6+
 4. **构建输出**: 仅输出 ESM 格式
 
@@ -480,7 +480,7 @@ pnpm build
 |-----|-----------|---------------|
 | 输出格式 | ESM | ESM + CJS |
 | public-path | 不需要 | 需要引入 |
-| React 最低版本 | 17.0.0 | 16.8.0 |
+| React 最低版本 | 16.8.0 | 16.8.0 |
 | useSyncExternalStore | 原生使用 | 提供 shim |
 
 ## License
