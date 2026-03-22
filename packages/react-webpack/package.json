@@ -1,0 +1,53 @@
+{
+  "name": "@micro-app-adapter/react-webpack",
+  "version": "1.0.0",
+  "description": "Micro-app lifecycle adapter for React + Webpack sub-app-applications",
+  "keywords": [
+    "micro-app",
+    "react",
+    "webpack",
+    "adapter"
+  ],
+  "author": "",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "father build",
+    "dev": "father dev",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./pubic-path": {
+      "default": "./dist/public-path.js",
+      "types": "./dist/public-path.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.6.0",
+    "father": "^4.5.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-router-dom": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "react-router-dom": ">=6.0.0"
+  }
+}

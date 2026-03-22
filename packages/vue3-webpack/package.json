@@ -1,0 +1,56 @@
+{
+  "name": "@micro-app-adapter/vue3-webpack",
+  "version": "1.0.0",
+  "description": "Micro-app lifecycle adapter for vue3 + Webpack sub-applications",
+  "keywords": [
+    "micro-app",
+    "vue3",
+    "webpack",
+    "adapter"
+  ],
+  "author": "",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "father build",
+    "dev": "father dev",
+    "prepublishOnly": "father doctor && npm run build"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./pubic-path": {
+      "default": "./dist/public-path.js",
+      "types": "./dist/public-path.d.ts"
+    },
+    "./route-sync": {
+      "default": "./dist/route-sync.js",
+      "types": "./dist/route-sync.d.ts"
+    }
+  },
+  "devDependencies": {
+    "father": "^4.5.0",
+    "vue": "^3.5.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.6.0",
+    "vue-router": "^4.6.0",
+    "@vue/tsconfig": "^0.9.0"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0",
+    "vue-router": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-router": {
+      "optional": true
+    }
+  }
+}
