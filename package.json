@@ -24,7 +24,14 @@
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
     "version": "changeset version && pnpm install --lockfile-only",
-    "release": "pnpm run build && changeset publish"
+    "release": "pnpm run build && changeset publish",
+    "release:patch": "pnpm run build && pnpm --filter \"./packages/*\" -r exec -- npm version patch --no-git-tag-version && pnpm --filter \"./packages/*\" -r publish --access public --ignore-scripts",
+    "release:minor": "pnpm run build && pnpm --filter \"./packages/*\" -r exec -- npm version minor --no-git-tag-version && pnpm --filter \"./packages/*\" -r publish --access public --ignore-scripts",
+    "release:major": "pnpm run build && pnpm --filter \"./packages/*\" -r exec -- npm version major --no-git-tag-version && pnpm --filter \"./packages/*\" -r publish --access public --ignore-scripts",
+    "version:patch": "pnpm --filter \"./packages/*\" -r exec -- npm version patch --no-git-tag-version",
+    "version:minor": "pnpm --filter \"./packages/*\" -r exec -- npm version minor --no-git-tag-version",
+    "version:major": "pnpm --filter \"./packages/*\" -r exec -- npm version major --no-git-tag-version",
+    "publish:all": "pnpm --filter \"./packages/*\" -r publish --access public --ignore-scripts"
   },
   "keywords": [],
   "author": "",
