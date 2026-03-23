@@ -16,6 +16,7 @@
   "scripts": {
     "build": "father build",
     "dev": "father dev",
+    "clean": "rimraf dist",
     "prepublishOnly": "father doctor && npm run build"
   },
   "files": [
