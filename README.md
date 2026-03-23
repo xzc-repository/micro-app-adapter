@@ -22,14 +22,25 @@ micro-app-adapter/
 └── tsconfig.base.json
 ```
 
-## 适配器对比
+## 适配器概览
 
-| 适配器包 | 框架 | 构建工具 | React版本要求 | Vue版本要求 | 特殊功能 |
-|---------|------|---------|--------------|------------|---------|
-| @micro-app-adapter/react-vite | React | Vite | >=16.8.0 | - | ESM输出 |
-| @micro-app-adapter/react-webpack | React | Webpack | >=16.8.0 | - | public-path、CJS+ESM输出 |
-| @micro-app-adapter/vue3-vite | Vue | Vite | - | >=3.0.0 | ESM输出 |
-| @micro-app-adapter/vue3-webpack | Vue | Webpack | - | >=3.0.0 | public-path、CJS+ESM输出、route-sync独立入口 |
+### 包功能说明
+
+| 适配器包 | 适用场景 | 核心功能 |
+|---------|---------|---------|
+| @micro-app-adapter/react-vite | React + Vite 子应用 | 生命周期管理、路由同步、数据通信、环境检测 |
+| @micro-app-adapter/react-webpack | React + Webpack 子应用 | 生命周期管理、路由同步、数据通信、环境检测、public-path |
+| @micro-app-adapter/vue3-vite | Vue3 + Vite 子应用 | 生命周期管理、路由同步、数据通信、环境检测 |
+| @micro-app-adapter/vue3-webpack | Vue3 + Webpack 子应用 | 生命周期管理、路由同步、数据通信、环境检测、public-path、独立route-sync入口 |
+
+### 技术栈与版本兼容性对比
+
+| 适配器包 | 框架版本 | 构建工具 | 输出格式 | public-path | 特殊功能 |
+|---------|---------|---------|---------|------------|---------|
+| @micro-app-adapter/react-vite | React >=16.8.0 | Vite | ESM | 不需要 | React 18+ createRoot API |
+| @micro-app-adapter/react-webpack | React >=16.8.0 | Webpack | ESM + CJS | **必须引入** | React 版本自动检测、useSyncExternalStore shim |
+| @micro-app-adapter/vue3-vite | Vue >=3.0.0 | Vite | ESM | 不需要 | 组合式API支持 |
+| @micro-app-adapter/vue3-webpack | Vue >=3.0.0 | Webpack | ESM + CJS | **必须引入** | 独立route-sync入口 |
 
 ## 核心功能
 
@@ -215,22 +226,35 @@ npm publish
 
 ## 版本差异说明
 
-### Vite vs Webpack
+### Vite vs Webpack 构建工具对比
 
 | 特性 | Vite 版本 | Webpack 版本 |
 |-----|----------|-------------|
 | 输出格式 | ESM | ESM + CJS |
-| public-path | 不需要 | 需要手动引入 |
-| 构建配置 | 更简洁 | 支持双模块格式 |
-| 兼容性 | 现代浏览器 | 更广泛的兼容性 |
+| public-path | 不需要（Vite原生支持ESM） | **必须引入**（入口文件顶部） |
+| 构建配置 | 更简洁，零配置 | 支持双模块格式，兼容性更广 |
+| 浏览器兼容性 | 现代浏览器 | 更广泛的浏览器支持 |
+| 开发体验 | 热更新更快 | 生态更成熟 |
 
-### React 版本差异
+### React 版本兼容性对比
 
 | 特性 | react-vite | react-webpack |
 |-----|-----------|---------------|
 | React 最低版本 | 16.8.0 | 16.8.0 |
-| React 18 支持 | 完整支持 | 完整支持 + 兼容模式 |
-| useSyncExternalStore | 原生使用 | 提供兼容 shim |
+| React 18 支持 | 完整支持（createRoot API） | 完整支持 + 向后兼容 |
+| 渲染 API | 仅 createRoot | 自动检测：React 18用createRoot，React <18用render |
+| useSyncExternalStore | 原生使用（React 18+） | 提供兼容 shim（支持 React <18） |
+| 版本迁移 | 需升级到 React 18+ | 平滑迁移，无需修改代码 |
+
+### Vue3 版本兼容性对比
+
+| 特性 | vue3-vite | vue3-webpack |
+|-----|----------|--------------|
+| Vue 最低版本 | 3.0.0 | 3.0.0 |
+| 组合式 API | 完整支持 | 完整支持 |
+| 路由同步入口 | 统一入口 | 独立 route-sync 入口 |
+| public-path | 不需要 | **必须引入** |
+| 输出格式 | ESM | ESM + CJS |
 
 ## 常见问题
 

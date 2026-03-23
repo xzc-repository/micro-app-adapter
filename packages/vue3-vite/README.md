@@ -6,20 +6,25 @@ Vue 3 + Vite 项目的微前端生命周期适配器，帮助 Vue 3 子应用快
 
 ### 核心功能
 
-- ✅ **生命周期管理** - 自动注册 mount/unmount 生命周期
-- ✅ **独立运行支持** - 非微前端环境下自动启动应用
-- ✅ **路由同步** - 主子应用路由双向同步
-- ✅ **数据通信** - 监听主应用下发的数据
-- ✅ **环境判断** - 检测微前端运行环境
-- ✅ **TypeScript 支持** - 完整的类型定义
+| 功能模块 | 功能描述 | 关键API |
+|---------|---------|--------|
+| 生命周期管理 | 自动注册 mount/unmount 生命周期到 window 对象 | `registerVueMicroApp` |
+| 独立运行支持 | 非微前端环境下自动启动应用，无需修改代码 | 自动检测 `__MICRO_APP_ENVIRONMENT__` |
+| 路由同步 | 主子应用路由双向同步，支持声明式和编程式导航 | `MicroAppRouter`, `useMicroAppNavigate` |
+| 数据通信 | 监听主应用下发的数据变化，支持路由事件监听 | `MicroAppDataListener`, `useMicroAppDataListener` |
+| 环境判断 | 检测微前端运行环境，获取基础路由等信息 | `isMicroApp`, `getBasename` |
+| TypeScript 支持 | 完整的类型定义，提供良好的开发体验 | 所有API均有类型定义 |
 
 ### 技术特点
 
-- 🚀 **ESM 输出** - 原生 ES Module，符合 Vite 生态
-- 📦 **零配置** - 开箱即用，无需复杂配置
-- 🎯 **Vue 3 组合式 API** - 提供完整的 Composition API 支持
-- 💪 **TypeScript** - 完整类型支持
-- 🧩 **组件化** - 提供开箱即用的路由组件
+| 特性 | 说明 |
+|-----|------|
+| 🚀 ESM 输出 | 原生 ES Module 输出格式，符合 Vite 生态最佳实践 |
+| 📦 零配置 | 开箱即用，无需复杂的构建配置 |
+| 🎯 组合式 API | 提供完整的 Composition API 支持，符合 Vue 3 最佳实践 |
+| 💪 TypeScript | 完整类型支持，提供优秀的IDE提示 |
+| 🧩 组件化 | 提供开箱即用的路由组件，简化开发流程 |
+| 🔧 无需 public-path | Vite 原生支持 ESM，无需配置动态公共路径 |
 
 ## 安装
 
@@ -35,8 +40,24 @@ yarn add @micro-app-adapter/vue3-vite
 
 ## 版本要求
 
-- Vue >= 3.0.0
-- Vue-Router >= 4.0.0 (可选)
+| 依赖包 | 版本要求 | 说明 |
+|-------|---------|------|
+| Vue | >=3.0.0 | 支持 Vue 3 组合式 API |
+| Vue-Router | >=4.0.0 | 可选，路由同步功能需要 |
+
+### Vue 3 版本兼容性详情
+
+| Vue 版本 | 支持状态 | 说明 |
+|---------|---------|------|
+| Vue 3.5+ | ✅ 完整支持 | 推荐版本，最新特性 |
+| Vue 3.0-3.4 | ✅ 完整支持 | 稳定版本 |
+
+### Vue-Router 版本兼容性
+
+| Vue-Router 版本 | 支持状态 | 说明 |
+|----------------|---------|------|
+| Vue-Router 4.x | ✅ 完整支持 | 与 Vue 3 配套使用 |
+| Vue-Router 3.x | ❌ 不支持 | 适用于 Vue 2，请使用 Vue 2 适配器 |
 
 ## 快速开始
 
@@ -599,14 +620,22 @@ pnpm build
 3. **路由库**: 可选使用 vue-router 4.0+，或使用内置路由组件
 4. **构建输出**: 仅输出 ESM 格式
 
-## 与 vue3-webpack 版本的差异
+## 与 vue3-webpack 版本的差异对比
 
 | 特性 | vue3-vite | vue3-webpack |
 |-----|----------|--------------|
 | 输出格式 | ESM | ESM + CJS |
-| public-path | 不需要 | 需要引入 |
-| route-sync 入口 | 无独立入口 | 有独立入口 |
-| 构建工具 | father (ESM only) | father (ESM + CJS) |
+| public-path | 不需要 | **必须引入** |
+| route-sync 独立入口 | ❌ 无 | ✅ 支持 |
+| 构建工具 | Vite | Webpack |
+| 浏览器兼容性 | 现代浏览器 | 更广泛 |
+| 开发体验 | 热更新更快 | 生态更成熟 |
+| 适用场景 | 新项目、现代浏览器 | 旧项目迁移、广泛兼容 |
+
+### 如何选择？
+
+- **选择 vue3-vite**：新项目、使用 Vite 构建、目标用户使用现代浏览器
+- **选择 vue3-webpack**：需要广泛浏览器支持、从旧项目迁移、使用 Webpack 构建
 
 ## License
 

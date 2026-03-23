@@ -6,21 +6,26 @@ Vue 3 + Webpack 项目的微前端生命周期适配器，帮助 Vue 3 子应用
 
 ### 核心功能
 
-- ✅ **生命周期管理** - 自动注册 mount/unmount 生命周期
-- ✅ **独立运行支持** - 非微前端环境下自动启动应用
-- ✅ **路由同步** - 主子应用路由双向同步
-- ✅ **数据通信** - 监听主应用下发的数据
-- ✅ **环境判断** - 检测微前端运行环境
-- ✅ **TypeScript 支持** - 完整的类型定义
-- ✅ **public-path 支持** - 动态公共路径配置
+| 功能模块 | 功能描述 | 关键API |
+|---------|---------|--------|
+| 生命周期管理 | 自动注册 mount/unmount 生命周期到 window 对象 | `registerVueMicroApp` |
+| 独立运行支持 | 非微前端环境下自动启动应用，无需修改代码 | 自动检测 `__MICRO_APP_ENVIRONMENT__` |
+| 路由同步 | 主子应用路由双向同步，支持声明式和编程式导航 | `MicroAppRouter`, `useMicroAppNavigate` |
+| 数据通信 | 监听主应用下发的数据变化，支持路由事件监听 | `MicroAppDataListener`, `useMicroAppDataListener` |
+| 环境判断 | 检测微前端运行环境，获取基础路由等信息 | `isMicroApp`, `getBasename` |
+| TypeScript 支持 | 完整的类型定义，提供良好的开发体验 | 所有API均有类型定义 |
+| public-path 支持 | 动态设置 Webpack 公共路径，解决资源加载问题 | `import '@micro-app-adapter/vue3-webpack/public-path'` |
 
 ### 技术特点
 
-- 📦 **双模块格式** - 同时输出 ESM 和 CJS
-- 🎯 **Vue 3 组合式 API** - 提供完整的 Composition API 支持
-- 💪 **TypeScript** - 完整类型支持
-- 🧩 **组件化** - 提供开箱即用的路由组件
-- 📤 **多入口** - 支持独立引入 public-path 和 route-sync
+| 特性 | 说明 |
+|-----|------|
+| 📦 双模块格式 | 同时输出 ESM 和 CJS 格式，兼容不同的模块系统 |
+| 🎯 组合式 API | 提供完整的 Composition API 支持，符合 Vue 3 最佳实践 |
+| 💪 TypeScript | 完整类型支持，提供优秀的IDE提示 |
+| 🧩 组件化 | 提供开箱即用的路由组件，简化开发流程 |
+| 📤 多入口 | 支持独立引入 public-path 和 route-sync 模块 |
+| 🔧 public-path | 提供动态公共路径配置，解决微前端资源加载问题 |
 
 ## 安装
 
@@ -36,8 +41,24 @@ yarn add @micro-app-adapter/vue3-webpack
 
 ## 版本要求
 
-- Vue >= 3.0.0
-- Vue-Router >= 4.0.0 (可选)
+| 依赖包 | 版本要求 | 说明 |
+|-------|---------|------|
+| Vue | >=3.0.0 | 支持 Vue 3 组合式 API |
+| Vue-Router | >=4.0.0 | 可选，路由同步功能需要 |
+
+### Vue 3 版本兼容性详情
+
+| Vue 版本 | 支持状态 | 说明 |
+|---------|---------|------|
+| Vue 3.5+ | ✅ 完整支持 | 推荐版本，最新特性 |
+| Vue 3.0-3.4 | ✅ 完整支持 | 稳定版本 |
+
+### Vue-Router 版本兼容性
+
+| Vue-Router 版本 | 支持状态 | 说明 |
+|----------------|---------|------|
+| Vue-Router 4.x | ✅ 完整支持 | 与 Vue 3 配套使用 |
+| Vue-Router 3.x | ❌ 不支持 | 适用于 Vue 2，请使用 Vue 2 适配器 |
 
 ## 快速开始
 
@@ -509,15 +530,22 @@ pnpm dev
 pnpm build
 ```
 
-## 与 vue3-vite 版本的差异
+## 与 vue3-vite 版本的差异对比
 
 | 特性 | vue3-webpack | vue3-vite |
 |-----|--------------|-----------|
 | 输出格式 | ESM + CJS | ESM |
 | public-path | **必须引入** | 不需要 |
 | route-sync 独立入口 | ✅ 支持 | ❌ 无 |
-| 构建工具 | father (双格式) | father (ESM only) |
-| 兼容性 | 更广泛 | 现代浏览器 |
+| 构建工具 | Webpack | Vite |
+| 浏览器兼容性 | 更广泛 | 现代浏览器 |
+| 开发体验 | 生态更成熟 | 热更新更快 |
+| 适用场景 | 旧项目迁移、广泛兼容 | 新项目、现代浏览器 |
+
+### 如何选择？
+
+- **选择 vue3-webpack**：需要广泛浏览器支持、从旧项目迁移、使用 Webpack 构建
+- **选择 vue3-vite**：新项目、使用 Vite 构建、目标用户使用现代浏览器
 
 ## 注意事项
 

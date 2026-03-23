@@ -6,19 +6,24 @@ React + Vite 项目的微前端生命周期适配器，帮助 React 子应用快
 
 ### 核心功能
 
-- ✅ **生命周期管理** - 自动注册 mount/unmount 生命周期
-- ✅ **独立运行支持** - 非微前端环境下自动启动应用
-- ✅ **路由同步** - 主子应用路由双向同步
-- ✅ **数据通信** - 监听主应用下发的数据
-- ✅ **环境判断** - 检测微前端运行环境
-- ✅ **TypeScript 支持** - 完整的类型定义
+| 功能模块 | 功能描述 | 关键API |
+|---------|---------|--------|
+| 生命周期管理 | 自动注册 mount/unmount 生命周期到 window 对象 | `registerReactMicroApp` |
+| 独立运行支持 | 非微前端环境下自动启动应用，无需修改代码 | 自动检测 `__MICRO_APP_ENVIRONMENT__` |
+| 路由同步 | 主子应用路由双向同步，支持声明式和编程式导航 | `MicroAppRouter`, `useMicroAppNavigate` |
+| 数据通信 | 监听主应用下发的数据变化，支持路由事件监听 | `MicroAppDataListener`, `useMicroAppDataListener` |
+| 环境判断 | 检测微前端运行环境，获取基础路由等信息 | `isMicroApp`, `getBasename` |
+| TypeScript 支持 | 完整的类型定义，提供良好的开发体验 | 所有API均有类型定义 |
 
 ### 技术特点
 
-- 🚀 **ESM 输出** - 原生 ES Module，符合 Vite 生态
-- 📦 **零配置** - 开箱即用，无需复杂配置
-- 🎯 **React 16.8+** - 支持 React 16.8+ 和 React 17/18
-- 💪 **TypeScript** - 完整类型支持
+| 特性 | 说明 |
+|-----|------|
+| 🚀 ESM 输出 | 原生 ES Module 输出格式，符合 Vite 生态最佳实践 |
+| 📦 零配置 | 开箱即用，无需复杂的构建配置 |
+| 🎯 React 18+ | 使用 createRoot API，支持 React 18 并发特性 |
+| 💪 TypeScript | 完整类型支持，提供优秀的IDE提示 |
+| 🔧 无需 public-path | Vite 原生支持 ESM，无需配置动态公共路径 |
 
 ## 安装
 
@@ -34,9 +39,19 @@ yarn add @micro-app-adapter/react-vite
 
 ## 版本要求
 
-- React >= 16.8.0
-- React-DOM >= 16.8.0
-- React-Router-DOM >= 6.0.0 (可选)
+| 依赖包 | 版本要求 | 说明 |
+|-------|---------|------|
+| React | >=16.8.0 | 支持 Hooks，推荐使用 React 18+ |
+| React-DOM | >=16.8.0 | 与 React 版本保持一致 |
+| React-Router-DOM | >=6.0.0 | 可选，路由同步功能需要 |
+
+### React 版本兼容性详情
+
+| React 版本 | 支持状态 | 渲染 API | 说明 |
+|-----------|---------|---------|------|
+| React 18.x | ✅ 完整支持 | createRoot | 推荐版本，支持并发特性 |
+| React 17.x | ✅ 支持 | createRoot | 需要从 react-dom/client 导入 createRoot |
+| React 16.8+ | ⚠️ 有限支持 | createRoot | 需升级或使用 react-webpack 版本 |
 
 ## 快速开始
 
@@ -474,14 +489,25 @@ pnpm build
 3. **路由库**: 使用 react-router-dom v6+
 4. **构建输出**: 仅输出 ESM 格式
 
-## 与 react-webpack 版本的差异
+## 与 react-webpack 版本的差异对比
 
 | 特性 | react-vite | react-webpack |
 |-----|-----------|---------------|
 | 输出格式 | ESM | ESM + CJS |
-| public-path | 不需要 | 需要引入 |
+| public-path | 不需要 | **必须引入** |
 | React 最低版本 | 16.8.0 | 16.8.0 |
-| useSyncExternalStore | 原生使用 | 提供 shim |
+| React 18 支持 | 完整支持（createRoot） | 完整支持 + 向后兼容 |
+| React <18 支持 | ⚠️ 有限支持 | ✅ 完整支持 |
+| 渲染 API | 仅 createRoot | 自动检测版本 |
+| useSyncExternalStore | 原生使用（React 18+） | 提供 shim（兼容 React <18） |
+| 浏览器兼容性 | 现代浏览器 | 更广泛 |
+| 构建工具 | Vite | Webpack |
+| 适用场景 | 新项目、现代浏览器 | 旧项目迁移、广泛兼容 |
+
+### 如何选择？
+
+- **选择 react-vite**：新项目、使用 Vite 构建、目标用户使用现代浏览器
+- **选择 react-webpack**：需要兼容 React <18、需要广泛浏览器支持、从旧项目迁移
 
 ## License
 
