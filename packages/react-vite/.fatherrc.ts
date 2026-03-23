@@ -1,8 +1,8 @@
-import { defineConfig } from 'father';
+import { defineConfig } from 'father'
 
 export default defineConfig({
   esm: {
-    output: "dist",
-    transformer:"babel"
-  }
-});
+    output: 'dist',
+    transformer: 'babel',
+  },
+})

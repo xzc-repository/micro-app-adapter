@@ -1,0 +1,19 @@
+{
+  "types": [
+    { "type": "feat", "section": "✨ Features | 新功能" },
+    { "type": "fix", "section": "🐛 Bug Fixes | Bug 修复" },
+    { "type": "perf", "section": "⚡ Performance | 性能优化" },
+    { "type": "refactor", "section": "♻️ Refactor | 代码重构" },
+    { "type": "docs", "section": "📝 Documentation | 文档" },
+    { "type": "test", "section": "✅ Tests | 测试" },
+    { "type": "build", "section": "📦 Build System | 打包构建" },
+    { "type": "chore", "section": "🔧 Chore | 构建/工具变动" }
+  ],
+  "releaseCommitMessageFormat": "chore(release): {{currentTag}}",
+  "skip": {
+    "bump": false,
+    "changelog": false,
+    "commit": false,
+    "tag": false
+  }
+}
