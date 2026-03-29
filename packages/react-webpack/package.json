@@ -20,15 +20,14 @@
     "prepublishOnly": "father doctor && npm run build"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "exports": {
     ".": {
       "default": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./pubic-path": {
+    "./public-path": {
       "default": "./dist/public-path.js",
       "types": "./dist/public-path.d.ts"
     }

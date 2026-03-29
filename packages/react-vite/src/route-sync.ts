@@ -225,7 +225,7 @@ function MicroAppRouterInternal(props: MicroAppRouterProps): JSX.Element {
         React.createElement(Route, {
           key: path,
           path,
-          element: React.createElement(Component),
+          element: React.createElement(Component) as JSX.Element,
         })
       )
     )
@@ -300,7 +300,7 @@ function MicroAppRouterContentWithoutListener(props: MicroAppRouteViewProps): JS
         React.createElement(Route, {
           key: path,
           path,
-          element: React.createElement(Component),
+          element: React.createElement(Component) as JSX.Element,
         })
       )
     )

@@ -19,8 +19,7 @@
     "prepublishOnly": "father doctor && npm run build"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "exports": {
     ".": {
